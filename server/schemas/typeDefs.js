@@ -1,4 +1,5 @@
 const typeDefs = `
+
 type User {
   _id: ID
   username: String
@@ -8,6 +9,19 @@ type User {
 }
 
 type Restraunt{
+    restaurantId: String
+    name: String
+    image: String
+    url: String
+    location: String
+    price: String
+    rating: String
+    phone: String
+    review_count: String
+    categories: String
+}
+
+input RestaurantInput {
     restaurantId: String
     name: String
     image: String
@@ -34,19 +48,6 @@ type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   saveRestaurant(input: RestaurantInput): User
   removeRestaurant(restaurantId: String!): User
-}
-
-input RestaurantInput {
-    restaurantId: String
-    name: String
-    image: String
-    url: String
-    location: String
-    price: String
-    rating: String
-    phone: String
-    review_count: String
-    categories: String
 }
 
 `
