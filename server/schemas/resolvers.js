@@ -1,104 +1,59 @@
-const { User, Product, Category, Order } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User } = require('../models');
 
 const resolvers = {
-  Query: {
-    categories: async () => {
-      return await Category.find();
+    Query: {
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password') // exclude the __v and password fields
+                return userData;
+            }
+            throw AuthenticationError;
+        },
     },
-    products: async (parent, { category, name }) => {
-      const params = {};
+    Mutation: {
+        loginUser: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+            if (!user) {
+                throw  AuthenticationError;
+            }
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
+                throw AuthenticationError;
+            }
+            const token = signToken(user);
+            return { token, user };
+        },
 
-      if (category) {
-        params.category = category;
-      }
+        addUser:  async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
+            const token = signToken(user);
+            return { token, user };
+        },
 
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
+        removeRestraunt:  async (parent, { restrauntId }, { user }) => {
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: user._id },
+              { $pull: { savedRestraunt: { restrauntId } } },
+              { new: true }
+            );
+            return updatedUser;
+        },
 
-      return await Product.find(params).populate('category');
+        saveRestraunt:  async (parent, { input }, { user }) => {
+            try {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: user._id },
+                    { $addToSet: { savedRestraunt: input } },
+                    { new: true, runValidators: true }
+                );
+                return updatedUser;
+            } catch (error) {
+                console.error(error);
+                throw new Error('Failed to update user');
+            }
+        },
+
+    
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
-    },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;
-      }
-
-      throw AuthenticationError;
-    },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        return user.orders.id(_id);
-      }
-
-      throw AuthenticationError;
-    },
-  },
-  Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-
-      return { token, user };
-    },
-    addOrder: async (parent, { products }, context) => {
-      if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw AuthenticationError;
-    },
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
-
-      throw AuthenticationError;
-    },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw AuthenticationError;
-      }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(user);
-
-      return { token, user };
-    }
-  }
 };
-
-module.exports = resolvers;
