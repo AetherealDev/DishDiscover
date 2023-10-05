@@ -5,33 +5,23 @@ type User {
   username: String
   email: String
   restaurantCount: Int
-  savedRestaurants: [Book]
+  savedRestaurants: [Restaurant]
 }
 
-type Restraunt{
-    restaurantId: String
-    name: String
+type Restaurant {
+    restaurantId: String 
     image: String
-    url: String
-    location: String
-    price: String
-    rating: String
-    phone: String
-    review_count: String
-    categories: String
+    name: String
+    address: String
+    rating: Float
 }
 
 input RestaurantInput {
-    restaurantId: String
-    name: String
+    restaurantId: String 
     image: String
-    url: String
-    location: String
-    price: String
-    rating: String
-    phone: String
-    review_count: String
-    categories: String
+    name: String
+    address: String
+    rating: Float
 }
 
 type Auth {
