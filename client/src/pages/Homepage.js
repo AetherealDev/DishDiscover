@@ -4,6 +4,7 @@ import SearchBar from './SearchBar';
 // import RestaurantList from './RestaurantList';
 import './HomePage.css'; // Assuming you have a corresponding CSS file
 import RestaurantCard from '../components/RestaurantCard';
+import MapSection from '../components/MapSection';
 
 const HomePage = () => {
   // Dummy data for demonstration purposes
@@ -20,6 +21,8 @@ const HomePage = () => {
     <div className="homepage">
       <SearchBar />
       <RestaurantCard restaurants={restaurants} />
+      <MapSection location={location} zoomLevel={17} /> {/* include it here */}
+
     </div>
   );
 };
