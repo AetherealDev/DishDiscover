@@ -14,7 +14,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
 import './index.css'
 
 import App from './App.jsx'
-import Home from './pages/Home';
+import Home from './pages/Homepage';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Favorite from './pages/Favorite';
@@ -29,6 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path: '/',
         element: <Home />
       }, {
         path: '/login',
