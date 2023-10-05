@@ -1,46 +1,21 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
-const restaurantSchema = new Schema(
-  {
-    name: {
+const restaurantSchema = new Schema({
+    restaurantId: { // saved restaurant id from GooglePlaces
       type: String,
       required: true,
-      unique: true,
     },
     image: {
       type: String,
     },
-    url: {
+    address: {
       type: String,
     },
-    location: {
+    name: {
       type: String,
-    },
-    price: {
-      type: String,
+      required: true,
     },
     rating: {
-      type: String,
+        type: Number,
     },
-    phone: {
-      type: String,
-    },
-    review_count: {
-      type: String,
-    },
-    categories: {
-      type: String,
-    }
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
-
-
-
-const Restaurant = model('Restaurant', restaurantSchema);
-
-module.exports = Restaurant;
+  });
