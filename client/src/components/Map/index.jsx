@@ -10,23 +10,27 @@ const LocationPin = ({ text }) => (
   </div>
 )
 
-export default function Map(
-  location = {
-    address: 'VIT University, Vellore',
-    lat: 10.99835602,
-    lng: 77.01502627,
-  },
-  zoomLevel = 11,
-){
+export default function Map()
+{
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627
+    },
+    zoom: 11
+  }; 
+
+
+
     return (
       <div className="map">
-        <h2 className="map-h2">Come Visit Us At Our Campus</h2>
+        <h2 className="map-h2">Come Visit Us At Our RESTAURANT</h2>
     
-        <div className="google-map">
+        <div className="google-map" style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: '' }}
-            defaultCenter={location}
-            defaultZoom={zoomLevel}
+            bootstrapURLKeys={{ key: 'AIzaSyBjVENG2N3Pkgwg-R90W7f39F1p8ZGlFMQ' }}
+            defaultCenter={defaultProps.center}
+            defaultZoom={defaultProps.zoom}
           >
             <LocationPin
               lat={location.lat}
