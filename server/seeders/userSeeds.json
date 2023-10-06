@@ -1,0 +1,9 @@
+[
+    {
+      "username": "user",
+      "email": "email@email.com",
+      "password": "password123",
+      "restaurantCount" : 0,
+      "savedRestaurants" : "Chili's"
+    }
+]

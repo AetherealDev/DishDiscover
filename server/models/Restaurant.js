@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 
-const restaurantSchema = new Schema({
+const Restaurant = new Schema({
     restaurantId: { // saved restaurant id from GooglePlaces
       type: String,
       required: true,
@@ -19,3 +19,5 @@ const restaurantSchema = new Schema({
         type: Number,
     },
   });
+
+module.exports = Restaurant;
