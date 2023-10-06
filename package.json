@@ -14,6 +14,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@iconify-icon/react": "^1.0.8",
+    "@iconify/react": "^4.1.1",
     "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "google-map-react": "^2.2.1"
   }
 }
