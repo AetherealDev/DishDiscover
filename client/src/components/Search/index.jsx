@@ -12,12 +12,14 @@ const SearchBar = () => {
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
       <input
+        style={{display: 'inline-block'}}
         type="text"
+        className="form-control"
         value={term}
         onChange={e => setTerm(e.target.value)}
         placeholder="Search restaurants..."
       />
-      <button type="submit">Search</button>
+      <button style={{display: 'inline-block'}} type="submit">Search</button>
     </form>
   );
 };

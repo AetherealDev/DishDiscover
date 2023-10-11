@@ -2,3 +2,15 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.custom-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.custom-footer {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
