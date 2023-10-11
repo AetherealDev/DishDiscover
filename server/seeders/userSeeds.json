@@ -1,22 +1,162 @@
 [
-    {
-      "username": "user",
-      "email": "email@email.com",
-      "password": "password123",
-      "restaurantCount" : 0,
-      "savedRestaurants" : [
-        {
-            "restaurantId": 1,
-            "name": "chili's",
-            "image": "https://en.wikipedia.org/wiki/Chili%27s#/media/File:Chili's_Logo.svg",
-            "url" : "chilis.com",
-            "location": "columbus ohio",
-            "price" : "$$",
-            "rating" : "3",
-            "phone" : "555-555-5555",
-            "review_count" : "0",
-            "categories" : "fine dining"
-        }
+  {
+    "username": "user1",
+    "email": "user1@example.com",
+    "password": "password123",
+    "restaurantCount": 2,
+    "savedRestaurants": [
+      {
+        "restaurantId": 1,
+        "name": "Chili's",
+        "image": "https://en.wikipedia.org/wiki/Chili%27s#/media/File:Chili's_Logo.svg",
+        "url": "chilis.com",
+        "location": "Columbus, Ohio",
+        "price": "$$",
+        "rating": "3",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Fine Dining"
+      },
+      {
+        "restaurantId": 2,
+        "name": "McDonald's",
+        "image": "https://en.wikipedia.org/wiki/McDonald%27s#/media/File:McDonald%27s_Golden_Arches.svg",
+        "url": "mcdonalds.com",
+        "location": "New York, New York",
+        "price": "$",
+        "rating": "2",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Fast Food"
+      }
     ]
-    }
+  },
+  {
+    "username": "user2",
+    "email": "user2@example.com",
+    "password": "password123",
+    "restaurantCount": 2,
+    "savedRestaurants": [
+      {
+        "restaurantId": 3,
+        "name": "Olive Garden",
+        "image": "https://en.wikipedia.org/wiki/Olive_Garden#/media/File:Olive_Garden_Logo.svg",
+        "url": "olivegarden.com",
+        "location": "Los Angeles, California",
+        "price": "$$",
+        "rating": "4",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Italian"
+      },
+      {
+        "restaurantId": 4,
+        "name": "Taco Bell",
+        "image": "https://en.wikipedia.org/wiki/Taco_Bell#/media/File:Taco_Bell_2016_logo.svg",
+        "url": "tacobell.com",
+        "location": "Houston, Texas",
+        "price": "$",
+        "rating": "3",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Fast Food"
+      }
+    ]
+  },
+  {
+    "username": "user3",
+    "email": "user3@example.com",
+    "password": "password123",
+    "restaurantCount": 2,
+    "savedRestaurants": [
+      {
+        "restaurantId": 5,
+        "name": "Red Lobster",
+        "image": "https://en.wikipedia.org/wiki/Red_Lobster#/media/File:Red_Lobster_logo.svg",
+        "url": "redlobster.com",
+        "location": "Miami, Florida",
+        "price": "$$",
+        "rating": "4",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Seafood"
+      },
+      {
+        "restaurantId": 6,
+        "name": "Burger King",
+        "image": "https://en.wikipedia.org/wiki/Burger_King#/media/File:Burger_King_logo.svg",
+        "url": "burgerking.com",
+        "location": "Chicago, Illinois",
+        "price": "$",
+        "rating": "2",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Fast Food"
+      }
+    ]
+  },
+  {
+    "username": "user4",
+    "email": "user4@example.com",
+    "password": "password123",
+    "restaurantCount": 2,
+    "savedRestaurants": [
+      {
+        "restaurantId": 7,
+        "name": "Outback Steakhouse",
+        "image": "https://en.wikipedia.org/wiki/Outback_Steakhouse#/media/File:Outback_Steakhouse_logo.svg",
+        "url": "outback.com",
+        "location": "Phoenix, Arizona",
+        "price": "$$",
+        "rating": "3",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Steakhouse"
+      },
+      {
+        "restaurantId": 8,
+        "name": "KFC",
+        "image": "https://en.wikipedia.org/wiki/KFC#/media/File:KFC_logo.svg",
+        "url": "kfc.com",
+        "location": "Dallas, Texas",
+        "price": "$",
+        "rating": "2",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Fast Food"
+      }
+    ]
+  },
+  {
+    "username": "user5",
+    "email": "user5@example.com",
+    "password": "password123",
+    "restaurantCount": 2,
+    "savedRestaurants": [
+      {
+        "restaurantId": 9,
+        "name": "Applebee's",
+        "image": "https://en.wikipedia.org/wiki/Applebee%27s#/media/File:Applebee%27s_logo.svg",
+        "url": "applebees.com",
+        "location": "Atlanta, Georgia",
+        "price": "$$",
+        "rating": "3",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "American"
+      },
+      {
+        "restaurantId": 10,
+        "name": "Subway",
+        "image": "https://en.wikipedia.org/wiki/Subway_(restaurant)#/media/File:Subway_2017.svg",
+        "url": "subway.com",
+        "location": "Seattle, Washington",
+        "price": "$",
+        "rating": "2",
+        "phone": "555-555-5555",
+        "review_count": "0",
+        "categories": "Fast Food"
+      }
+    ]
+  }
 ]
