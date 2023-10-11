@@ -1,0 +1,5 @@
+const nearbySearch = () => {
+    return fetch ('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7128,-74.0060&radius=500&type=restaurant&key=AIzaSyBjVENG2N3Pkgwg-R90W7f39F1p8ZGlFMQ');
+}
+
+module.exports = nearbySearch;
