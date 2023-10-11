@@ -24,6 +24,14 @@ input RestaurantInput {
     rating: Float
 }
 
+type GoogleRestaurant {
+    place_id: String
+    name: String
+    vicinity: String
+    rating: Float
+    user_ratings_total: Int
+}
+
 type Auth {
   token: ID!
   user: User
@@ -31,6 +39,7 @@ type Auth {
 
 type Query {
   me: User
+  searchRestaurants(location: String!): [GoogleRestaurant]
 }
 
 type Mutation {
