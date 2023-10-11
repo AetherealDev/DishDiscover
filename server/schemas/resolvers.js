@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -31,7 +32,7 @@ const resolvers = {
             return { token, user };
         },
 
-        removeRestraunt:  async (parent, { restrauntId }, { user }) => {
+        removeRestaurant:  async (parent, { restrauntId }, { user }) => {
             const updatedUser = await User.findOneAndUpdate(
               { _id: user._id },
               { $pull: { savedRestraunt: { restrauntId } } },
@@ -40,7 +41,7 @@ const resolvers = {
             return updatedUser;
         },
 
-        saveRestraunt:  async (parent, { input }, { user }) => {
+        saveRestaurant:  async (parent, { input }, { user }) => {
             try {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: user._id },
@@ -53,7 +54,7 @@ const resolvers = {
                 throw new Error('Failed to update user');
             }
         },
-
-    
     },
 };
+
+module.exports = resolvers;
