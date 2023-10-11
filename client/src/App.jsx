@@ -1,10 +1,8 @@
 import './App.css'
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 
 import {
   ApolloClient,
@@ -34,9 +32,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function App() {
-  // const [count, setCount] = useState(0)
 
+
+function App() {
       return (
         <ApolloProvider client={client}>
           <div className="flex-column justify-flex-start min-100-vh">
