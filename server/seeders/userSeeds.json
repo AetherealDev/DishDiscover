@@ -4,6 +4,19 @@
       "email": "email@email.com",
       "password": "password123",
       "restaurantCount" : 0,
-      "savedRestaurants" : "Chili's"
+      "savedRestaurants" : [
+        {
+            "restaurantId": 1,
+            "name": "chili's",
+            "image": "https://en.wikipedia.org/wiki/Chili%27s#/media/File:Chili's_Logo.svg",
+            "url" : "chilis.com",
+            "location": "columbus ohio",
+            "price" : "$$",
+            "rating" : "3",
+            "phone" : "555-555-5555",
+            "review_count" : "0",
+            "categories" : "fine dining"
+        }
+    ]
     }
 ]

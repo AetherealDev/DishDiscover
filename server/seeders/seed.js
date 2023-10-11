@@ -2,15 +2,15 @@ const db = require('../config/connection');
 const { User, Restaurant } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const restaurantSeeds = require('./restaurantSeeds.json');
-const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
   try {
-    await cleanDB('restaurant', 'restaurants');
-    await cleanDB('User', 'users');
+
+   // delete all existing data
+    await User.deleteMany({});
+
 
     const users = await User.create(userSeeds);
-    const restaurants = await Restaurant.create(restaurantSeeds);
 
 
   } catch (err) {

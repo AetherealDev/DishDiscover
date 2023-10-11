@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 // import './SearchBar.css'; 
 
+import {getNearbyRestaurants} from '../../utils/API.js';
+
 const SearchBar = () => {
   const [term, setTerm] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call API to search or redirect to a search results page, etc.
+    getNearbyRestaurants();
   };
 
   return (

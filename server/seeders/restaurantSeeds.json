@@ -1,5 +1,6 @@
 [
     {
+        "restaurantId": 1,
         "name": "chili's",
         "image": "https://en.wikipedia.org/wiki/Chili%27s#/media/File:Chili's_Logo.svg",
         "url" : "chilis.com",
