@@ -1,5 +1,9 @@
 const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const nearbySearch = require('../utils/googlePlaces');
+
+
+
 
 const resolvers = {
     Query: {
@@ -9,8 +13,13 @@ const resolvers = {
                     .select('-__v -password') // exclude the __v and password fields
                 return userData;
             }
-            throw AuthenticationError;
+            throw new AuthenticationError('Not logged in');
         },
+        searchRestaurants: async (parent, { location }) => {
+            const results = await nearbySearch();
+            console.log(results.photos);
+            return results.results; // return the array of results
+        }
     },
     Mutation: {
         loginUser: async (parent, { email, password }) => {
