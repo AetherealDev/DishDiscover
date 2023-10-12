@@ -4,8 +4,8 @@ const Footer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   return (
-    <footer className="w-100 mt-auto p-4 custom-footer">
-      <div className="container text-center mb-5">
+    <footer className="w-100 mt-auto p-2 custom-footer">
+      <div className="container text-center">
         {location.pathname !== '/' && (
           <button
             className="btn btn-dark mb-3"

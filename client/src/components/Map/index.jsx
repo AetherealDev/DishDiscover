@@ -20,11 +20,8 @@ export default function Map()
     zoom: 11
   }; 
 
-
-
     return (
-      <div className="map">
-        <h2 className="map-h2">Come Visit Us At Our RESTAURANT</h2>
+      <div className="map mt-4 mb-5">
     
         <div className="google-map" style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact

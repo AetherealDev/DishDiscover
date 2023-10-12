@@ -7,22 +7,28 @@
 }
 
 .custom-header {
-  background-color: #D2B48C;  /* tan color */
   padding: 20px;
-  color: #333333;  /* dark text color */
+  color: transparent 
 }
 
 .custom-footer {
-  background-color: #D2B48C;  /* tan color */
   padding: 20px;
-  color: #333333;  /* dark text color */
+  color: #000000;  /* dark text color */
 }
 
 /* set a backround image for the whole page */
-body {
-  background-image: url("Polygon-7.8s-1929px.svg");
+.app {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+  background-image: url('flow-top.svg');
+  color: aliceblue;
 }
+
+
+.btn {
+  padding: .45rem 1.5rem .35rem;
+}
+
+

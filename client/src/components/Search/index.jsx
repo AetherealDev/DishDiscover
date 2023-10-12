@@ -21,19 +21,27 @@ const SearchBar = () => {
   }, [data]);
 
   return (
-    <div>
-      <form className="search-bar" onSubmit={handleSubmit}>
+    <div className='mt-5 pt-5'>
+      <form className="form-inline" onSubmit={handleSubmit}>
+        <div className='form-group mx-sm-3 mb-2'>
         <input
-          style={{display: 'inline-block'}}
           type="text"
           className="form-control"
           value={term}
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
-        <button style={{display: 'inline-block', color: 'black'}} type="submit">Search</button>
+        </div>
+        <button type="submit" className='btn btn-primary mb-2'>Search</button>
       </form>
       <div className="card-container">
+        {loading && <div>Loading...</div>}
+        {error && <div>Error! {error.message}</div>}
+        {data && !data.searchRestaurants.length && <div>No results found!</div>}
+
+        {/* if restraunt data exists */}
+        {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
+
         {data && data.searchRestaurants.map((restaurant) => (
           <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
