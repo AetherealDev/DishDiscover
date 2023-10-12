@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@iconify-icon/react": "^1.0.8",
+    "@iconify/icons-mdi": "^1.2.47",
     "@iconify/react": "^4.1.1",
     "concurrently": "^8.2.0"
   },
