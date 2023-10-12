@@ -31,7 +31,7 @@ const SearchBar = () => {
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
-        <button style={{display: 'inline-block'}} type="submit">Search</button>
+        <button style={{display: 'inline-block', color: 'black'}} type="submit">Search</button>
       </form>
       <div className="card-container">
         {data && data.searchRestaurants.map((restaurant) => (
