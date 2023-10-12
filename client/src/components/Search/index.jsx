@@ -22,6 +22,7 @@ const SearchBar = () => {
 
   return (
     <div className='mt-5 pt-5'>
+      <h1>Search Restaurants</h1>
       <form className="form-inline" onSubmit={handleSubmit}>
         <div className='form-group mx-sm-3 mb-2'>
         <input
