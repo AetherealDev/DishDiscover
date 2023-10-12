@@ -14,6 +14,17 @@ query Me {
       name
       rating
     }
+  }, 
+}
+`
+export const QUERY_RESTAURANTS = gql`
+query SearchRestaurants($term: String!) {
+  searchRestaurants(term: $term) {
+    name
+    rating
+    place_id
+    vicinity
+    user_ratings_total
   }
 }
 `
