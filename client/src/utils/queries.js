@@ -8,11 +8,11 @@ query Me {
     email
     restaurantCount
     savedRestaurants {
-      restaurantId
-      address
-      image
       name
-      rating
+    rating
+    place_id
+    vicinity
+    user_ratings_total
     }
   }, 
 }

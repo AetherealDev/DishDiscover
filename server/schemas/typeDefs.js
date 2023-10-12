@@ -5,23 +5,15 @@ type User {
   username: String
   email: String
   restaurantCount: Int
-  savedRestaurants: [Restaurant]
-}
-
-type Restaurant {
-    restaurantId: String 
-    image: String
-    name: String
-    address: String
-    rating: Float
+  savedRestaurants: [GoogleRestaurant]
 }
 
 input RestaurantInput {
-    restaurantId: String 
-    image: String
-    name: String
-    address: String
-    rating: Float
+  place_id: String
+  name: String
+  vicinity: String
+  rating: Float
+  user_ratings_total: Int
 }
 
 type GoogleRestaurant {

@@ -1,21 +1,21 @@
 const { Schema } = require('mongoose');
 
 const Restaurant = new Schema({
-    restaurantId: { // saved restaurant id from GooglePlaces
+    place_id: { // saved restaurant id from GooglePlaces
       type: String,
       required: true,
-    },
-    image: {
-      type: String,
-    },
-    address: {
-      type: String,
     },
     name: {
       type: String,
-      required: true,
+    },
+    vicinity: {
+      type: String,
     },
     rating: {
+      type: Number, // rating from GooglePlaces
+      required: true,
+    },
+    user_ratings_total: {
         type: Number,
     },
   });
