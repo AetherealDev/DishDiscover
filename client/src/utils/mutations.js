@@ -10,11 +10,11 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
       email
       restaurantCount
       savedRestaurants {
-        restaurantId
-        image
         name
-        address
-        rating
+    rating
+    place_id
+    vicinity
+    user_ratings_total
       }
     }
   }
@@ -31,11 +31,11 @@ mutation LoginUser($email: String!, $password: String!) {
       email
       restaurantCount
       savedRestaurants {
-        restaurantId
-        image
         name
-        address
-        rating
+    rating
+    place_id
+    vicinity
+    user_ratings_total
       }
     }
   }
@@ -50,11 +50,11 @@ mutation RemoveRestaurant($restaurantId: String!) {
     email
     restaurantCount
     savedRestaurants {
-      restaurantId
-      image
       name
-      address
-      rating
+    rating
+    place_id
+    vicinity
+    user_ratings_total
     }
   }
 }
@@ -68,11 +68,11 @@ mutation SaveRestaurant($input: RestaurantInput!) {
     email
     restaurantCount
     savedRestaurants {
-      restaurantId
-      image
       name
-      address
-      rating
+    rating
+    place_id
+    vicinity
+    user_ratings_total
     }
   }
 }

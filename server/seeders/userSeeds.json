@@ -6,28 +6,18 @@
     "restaurantCount": 2,
     "savedRestaurants": [
       {
-        "restaurantId": 1,
+        "place_id": "Chili's",
         "name": "Chili's",
-        "image": "https://en.wikipedia.org/wiki/Chili%27s#/media/File:Chili's_Logo.svg",
-        "url": "chilis.com",
-        "address": "Columbus, Ohio",
-        "price": "$$",
-        "rating": "3",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Fine Dining"
+        "vicinity": "Columbus, Ohio",
+        "rating": 3,
+        "user_ratings_total": 0
       },
       {
-        "restaurantId": 2,
+        "place_id": "McDonald's",
         "name": "McDonald's",
-        "image": "https://en.wikipedia.org/wiki/McDonald%27s#/media/File:McDonald%27s_Golden_Arches.svg",
-        "url": "mcdonalds.com",
-        "address": "New York, New York",
-        "price": "$",
-        "rating": "2",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Fast Food"
+        "vicinity": "New York, New York",
+        "rating": 2,
+        "user_ratings_total": 0
       }
     ]
   },
@@ -38,28 +28,18 @@
     "restaurantCount": 2,
     "savedRestaurants": [
       {
-        "restaurantId": 3,
+        "place_id": "Olive Garden",
         "name": "Olive Garden",
-        "image": "https://en.wikipedia.org/wiki/Olive_Garden#/media/File:Olive_Garden_Logo.svg",
-        "url": "olivegarden.com",
-        "address": "Los Angeles, California",
-        "price": "$$",
-        "rating": "4",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Italian"
+        "vicinity": "Los Angeles, California",
+        "rating": 4,
+        "user_ratings_total": 0
       },
       {
-        "restaurantId": 4,
+        "place_id": "Taco Bell",
         "name": "Taco Bell",
-        "image": "https://en.wikipedia.org/wiki/Taco_Bell#/media/File:Taco_Bell_2016_logo.svg",
-        "url": "tacobell.com",
-        "address": "Houston, Texas",
-        "price": "$",
-        "rating": "3",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Fast Food"
+        "vicinity": "Houston, Texas",
+        "rating": 3,
+        "user_ratings_total": 0
       }
     ]
   },
@@ -70,28 +50,18 @@
     "restaurantCount": 2,
     "savedRestaurants": [
       {
-        "restaurantId": 5,
+        "place_id": "Red Lobster",
         "name": "Red Lobster",
-        "image": "https://en.wikipedia.org/wiki/Red_Lobster#/media/File:Red_Lobster_logo.svg",
-        "url": "redlobster.com",
-        "address": "Miami, Florida",
-        "price": "$$",
-        "rating": "4",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Seafood"
+        "vicinity": "Miami, Florida",
+        "rating": 4,
+        "user_ratings_total": 0
       },
       {
-        "restaurantId": 6,
+        "place_id": "Burger King",
         "name": "Burger King",
-        "image": "https://en.wikipedia.org/wiki/Burger_King#/media/File:Burger_King_logo.svg",
-        "url": "burgerking.com",
-        "address": "Chicago, Illinois",
-        "price": "$",
-        "rating": "2",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Fast Food"
+        "vicinity": "Chicago, Illinois",
+        "rating": 2,
+        "user_ratings_total": 0
       }
     ]
   },
@@ -102,28 +72,18 @@
     "restaurantCount": 2,
     "savedRestaurants": [
       {
-        "restaurantId": 7,
+        "place_id": "Outback Steakhouse",
         "name": "Outback Steakhouse",
-        "image": "https://en.wikipedia.org/wiki/Outback_Steakhouse#/media/File:Outback_Steakhouse_logo.svg",
-        "url": "outback.com",
-        "address": "Phoenix, Arizona",
-        "price": "$$",
-        "rating": "3",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Steakhouse"
+        "vicinity": "Phoenix, Arizona",
+        "rating": 3,
+        "user_ratings_total": 0
       },
       {
-        "restaurantId": 8,
+        "place_id": "KFC",
         "name": "KFC",
-        "image": "https://en.wikipedia.org/wiki/KFC#/media/File:KFC_logo.svg",
-        "url": "kfc.com",
-        "address": "Dallas, Texas",
-        "price": "$",
-        "rating": "2",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Fast Food"
+        "vicinity": "Dallas, Texas",
+        "rating": 2,
+        "user_ratings_total": 0
       }
     ]
   },
@@ -134,28 +94,18 @@
     "restaurantCount": 2,
     "savedRestaurants": [
       {
-        "restaurantId": 9,
+        "place_id": "Applebee's",
         "name": "Applebee's",
-        "image": "https://en.wikipedia.org/wiki/Applebee%27s#/media/File:Applebee%27s_logo.svg",
-        "url": "applebees.com",
-        "address": "Atlanta, Georgia",
-        "price": "$$",
-        "rating": "3",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "American"
+        "vicinity": "Atlanta, Georgia",
+        "rating": 3,
+        "user_ratings_total": 0
       },
       {
-        "restaurantId": 10,
+        "place_id": "Subway",
         "name": "Subway",
-        "image": "https://en.wikipedia.org/wiki/Subway_(restaurant)#/media/File:Subway_2017.svg",
-        "url": "subway.com",
-        "address": "Seattle, Washington",
-        "price": "$",
-        "rating": "2",
-        "phone": "555-555-5555",
-        "review_count": "0",
-        "categories": "Fast Food"
+        "vicinity": "Seattle, Washington",
+        "rating": 2,
+        "user_ratings_total": 0
       }
     ]
   }

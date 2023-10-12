@@ -7,11 +7,32 @@ import { Card, Button } from 'react-bootstrap';
 const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
+  // const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     getRestaurants({ variables: { term: term } });
   };
+
+  // const handleSaveRestaurant = async (restaurant) => {
+  //   // get token
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //   if (!token) {
+  //     return false;
+  //   }
+
+  //   try {
+  //     // call the saveRestaurant mutation
+  //     const { data } = await saveRestaurant({
+  //       variables: { input: restaurant },
+  //     });
+
+  //     console.log(data.saveRestaurant);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   // Log the restaurant data when it changes
   useEffect(() => {
@@ -51,7 +72,10 @@ const SearchBar = () => {
               <Card.Text>
                 Rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews)
               </Card.Text>
-              <Button variant="primary">More Details</Button>
+              <div>
+                <Button variant="secondary" size="sm">Map</Button>
+                <Button variant="success" size="sm">Favorite</Button>
+              </div>
             </Card.Body>
           </Card>
         ))}
