@@ -54,7 +54,7 @@ const resolvers = {
             try {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: user._id },
-                    { $addToSet: { savedRestraunt: input } },
+                    { $addToSet: { savedRestaurants: input } },
                     { new: true, runValidators: true }
                 );
                 return updatedUser;
