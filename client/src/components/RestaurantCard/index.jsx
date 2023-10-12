@@ -9,13 +9,13 @@ const RestaurantCard = ({
   }
 
   return (
+    console.log(restaurants),
     <div>
       {showTitle && <h3>{title}</h3>}
       {restaurants &&
         restaurants.map((restaurant) => (
           <div key={restaurant._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">
-            </h4>
+            <h4 className="card-header bg-primary text-light p-2 m-0">{restaurant.name}</h4>
             <div className="card-body bg-light p-2">
             <p>{restaurant.address}</p>
             <p>{restaurant.rating}</p>
