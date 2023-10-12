@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 const RestaurantCard = ({
     restaurants,
+    showTitle=true,
 }) => {
   if (!restaurants.length) {
     return <h3>No Favorites Yet</h3>;
