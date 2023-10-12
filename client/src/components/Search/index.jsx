@@ -1,38 +1,43 @@
 import { useState } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
+import { SAVE_RESTAURANT } from '../../utils/mutations';
 import { useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import Auth from '../../utils/auth';
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
-  // const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
+  const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     getRestaurants({ variables: { term: term } });
   };
 
-  // const handleSaveRestaurant = async (restaurant) => {
-  //   // get token
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+  const handleSaveRestaurant = async (restaurant) => {
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  //   if (!token) {
-  //     return false;
-  //   }
+    if (!token) {
+      return false;
+    }
 
-  //   try {
-  //     // call the saveRestaurant mutation
-  //     const { data } = await saveRestaurant({
-  //       variables: { input: restaurant },
-  //     });
+    try {
+      // remove __typename field from restaurant object
+      const { __typename, ...restaurantInput } = restaurant;
 
-  //     console.log(data.saveRestaurant);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
+      // call the saveRestaurant mutation with restaurantInput
+      const { data } = await saveRestaurant({
+        variables: { input: restaurantInput },
+      });
+
+      console.log(data.saveRestaurant);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   // Log the restaurant data when it changes
   useEffect(() => {
@@ -74,8 +79,8 @@ const SearchBar = () => {
               </Card.Text>
               <div>
                 <Button variant="secondary" size="sm">Map</Button>
-                <Button variant="success" size="sm">Favorite</Button>
-              </div>
+                  <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
+                </div>
             </Card.Body>
           </Card>
         ))}
