@@ -43,7 +43,6 @@ const Profile = () => {
           <RestaurantCard
             restaurants={user.savedRestaurants}
             title={`${user.email}'s favorites...`}
-            showTitle={false}
             showUsername={false}
           />
         </div>
