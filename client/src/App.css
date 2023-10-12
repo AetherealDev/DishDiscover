@@ -2,15 +2,20 @@
   margin: 0 auto;
   text-align: center;
 }
+.custom-header h1 {
+  color: #333333;  /* dark text color */
+}
 
 .custom-header {
-  background-color: #282c34;
+  background-color: #D2B48C;  /* tan color */
   padding: 20px;
-  color: white;
+  color: #333333;  /* dark text color */
 }
 
 .custom-footer {
-  background-color: #282c34;
+  background-color: #D2B48C;  /* tan color */
   padding: 20px;
-  color: white;
+  color: #333333;  /* dark text color */
 }
+
+
