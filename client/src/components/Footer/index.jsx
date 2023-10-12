@@ -22,7 +22,7 @@ const Footer = () => {
             aria-label="heart"
             aria-hidden="false"
           >
-            ❤️
+            🍝
           </span>{' '}
           by the Dish Discover team.
         </h4>

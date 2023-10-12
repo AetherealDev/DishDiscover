@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 // import ThoughtForm from '../components/ThoughtForm';
 // import ThoughtList from '../components/ThoughtList';
 
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
@@ -28,6 +28,7 @@ const Profile = () => {
   if (!user?.username) {
     return (
       <h4>
+        Viewing {`${user.username}'s`} profile.
         You need to be logged in to see this. Use the navigation links above to
         sign up or log in!
       </h4>

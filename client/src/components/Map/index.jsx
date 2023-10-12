@@ -14,10 +14,10 @@ export default function Map()
 {
   const defaultProps = {
     center: {
-      lat: 10.99835602,
-      lng: 77.01502627
+      lat: 39.9610877,
+      lng: -82.9978041
     },
-    zoom: 11
+    zoom: 12
   }; 
 
 
