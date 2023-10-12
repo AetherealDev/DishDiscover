@@ -1,6 +1,7 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { Icon } from '@iconify/react'
+import './map.css'
 
 
 const LocationPin = ({ text }) => (
@@ -17,7 +18,7 @@ export default function Map()
       lat: 39.983334,
       lng: -82.983330
     },
-    zoom: 11
+    zoom: 15
   }; 
 
     return (
@@ -30,8 +31,8 @@ export default function Map()
             defaultZoom={defaultProps.zoom}
           >
             <LocationPin
-              lat={location.lat}
-              lng={location.lng}
+              lat={defaultProps.center.lat}
+              lng={defaultProps.center.lng}
               text={location.address}
             />
           </GoogleMapReact>
