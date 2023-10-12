@@ -18,10 +18,10 @@ const RestaurantCard = ({
           <div key={restaurant._id} className="card mb-3">
             <h4 className="card-header bg-primary text-light p-2 m-0">{restaurant.name}</h4>
             <div className="card-body bg-light p-2">
-            <p>address: {restaurant.address}</p>
+            <p>address: {restaurant.vicinity}</p>
             <p>rating: {restaurant.rating}</p>
             </div>
-            </div>
+          </div>
         ))}
     </div>
   );
