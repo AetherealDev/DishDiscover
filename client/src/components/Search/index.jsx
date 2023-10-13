@@ -78,8 +78,8 @@ const SearchBar = () => {
                 Rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews)
               </Card.Text>
               <div>
-                <Button variant="secondary" size="sm">Map</Button>
-                  <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
+                <Button variant="secondary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
+                <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
                 </div>
             </Card.Body>
           </Card>
