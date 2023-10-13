@@ -17,8 +17,8 @@ const resolvers = {
         },
         searchRestaurants: async (parent, { term }) => {
             const results = await nearbySearch(term);
+            console.log(results.results[0]);
             console.log(results.results[0].geometry);
-            console.log(results.results[0].photos[0]);
 
             return results.results; // return the array of results
         }
@@ -52,8 +52,9 @@ const resolvers = {
             return updatedUser;
         },
 
-        saveRestaurant:  async (parent, { input }, { user }) => {
+        saveRestaurant: async (parent, { input }, { user }) => {
             try {
+                console.log(input);
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: user._id },
                     { $addToSet: { savedRestaurants: input } },

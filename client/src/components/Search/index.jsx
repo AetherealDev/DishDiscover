@@ -6,6 +6,17 @@ import { useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 
+
+function cleanTypename(obj) {
+  const { __typename, ...result } = obj;
+  Object.keys(result).forEach(key => {
+    if (typeof result[key] === 'object' && result[key] !== null) {
+      result[key] = cleanTypename(result[key]);
+    }
+  });
+  return result;
+}
+
 const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
@@ -18,6 +29,8 @@ const SearchBar = () => {
 
   const handleSaveRestaurant = async (restaurant) => {
     // get token
+
+    console.log(restaurant);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -26,14 +39,13 @@ const SearchBar = () => {
 
     try {
       // remove __typename field from restaurant object
-      const { __typename, ...restaurantInput } = restaurant;
+      const restaurantInput = cleanTypename(restaurant);
 
       // call the saveRestaurant mutation with restaurantInput
       const { data } = await saveRestaurant({
         variables: { input: restaurantInput },
       });
 
-      console.log(data.saveRestaurant);
     } catch (err) {
       console.error(err);
     }
@@ -70,6 +82,7 @@ const SearchBar = () => {
         {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
 
         {data && data.searchRestaurants.map((restaurant) => (
+          console.log(restaurant),
           <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
               <Card.Title>{restaurant.name}</Card.Title>

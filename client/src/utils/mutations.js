@@ -61,18 +61,34 @@ mutation RemoveRestaurant($restaurantId: String!) {
 `
 
 export const SAVE_RESTAURANT = gql`
-mutation SaveRestaurant($input: RestaurantInput!) {
+mutation SaveRestaurant($input: RestaurantInput) {
   saveRestaurant(input: $input) {
     _id
-    username
-    email
     restaurantCount
+    email
+    username
     savedRestaurants {
+      place_id
       name
-    rating
-    place_id
-    vicinity
-    user_ratings_total
+      vicinity
+      rating
+      user_ratings_total
+      geometry {
+        location {
+          lat
+          lng
+        }
+        viewport {
+          northeast {
+            lat
+            lng
+          }
+          southwest {
+            lat
+            lng
+          }
+        }
+      }
     }
   }
 }
