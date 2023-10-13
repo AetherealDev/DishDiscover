@@ -18,6 +18,8 @@ const resolvers = {
         searchRestaurants: async (parent, { term }) => {
             const results = await nearbySearch(term);
             console.log(results.results[0].geometry);
+            console.log(results.results[0].photos[0]);
+
             return results.results; // return the array of results
         }
     },

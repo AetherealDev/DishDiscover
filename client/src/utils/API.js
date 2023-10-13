@@ -9,6 +9,5 @@ export const getNearbyRestaurants = async () => {
     };
 
     const response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', { params });
-    console.log(response.data);
     return response.data;
 };
