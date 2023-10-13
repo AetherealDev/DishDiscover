@@ -14,7 +14,7 @@ const location = {
 
 const LocationPin = ({ text }) => (
   <div className="pin">
-    <Icon icon="typcn:location" className="pin-icon" />
+    <Icon icon={locationIcon} className="pin-icon" />
     <p className="pin-text">{text}</p>
   </div>
 )
@@ -32,7 +32,7 @@ export default function Map( {location, zoomLevel} )
     return (
       <div className="map mt-4 mb-5">
     
-        <div className="google-map" style={{ height: '100vh', width: '100%' }}>
+        <div className="google-map">
           <GoogleMapReact
             bootstrapURLKeys={{ key: "AIzaSyBjVENG2N3Pkgwg-R90W7f39F1p8ZGlFMQ" }}
             defaultCenter={defaultProps.center}
