@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
 import { SAVE_RESTAURANT } from '../../utils/mutations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 import LocationForm from '../LocationForm';
@@ -22,6 +21,22 @@ const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+
+  const onAddressChange = (address) => {
+    setAddress(address);
+    console.log(address);
+  };
+
+  const onCityChange = (city) => {
+    setCity(city);
+  };
+
+  const onStateChange = (state) => {
+    setState(state);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +86,14 @@ const SearchBar = () => {
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
-        <LocationForm  />
+        <LocationForm 
+        city={city} 
+        address={address} 
+        state={state} 
+        onAddressChange= { (address) => onAddressChange(address)}
+        onCityChange= { (city) => onCityChange(city) }
+        onStateChange= { (state) => onStateChange(state)}
+        />
         </div>
         <button type="submit" className='btn btn-outline-light mb-2'>Search</button>
       </form>
