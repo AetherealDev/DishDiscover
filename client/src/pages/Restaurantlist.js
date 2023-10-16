@@ -1,8 +1,8 @@
-// RestaurantList.js
-import React from 'react';
-import './RestaurantList.css'; 
 
-const RestaurantList = ({ restaurants }) => {
+import React from 'react';
+import './Restaurantlist.css'; 
+
+const Restaurantlist = ({ restaurants }) => {
   return (
     <div className="restaurant-list">
       <ul>
@@ -19,4 +19,4 @@ const RestaurantList = ({ restaurants }) => {
   );
 };
 
-export default RestaurantList;
+export default Restaurantlist;

@@ -5,6 +5,18 @@ import { SAVE_RESTAURANT } from '../../utils/mutations';
 import { useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
+import LocationForm from '../LocationForm';
+
+
+function cleanTypename(obj) {
+  const { __typename, ...result } = obj;
+  Object.keys(result).forEach(key => {
+    if (typeof result[key] === 'object' && result[key] !== null) {
+      result[key] = cleanTypename(result[key]);
+    }
+  });
+  return result;
+}
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
@@ -18,6 +30,8 @@ const SearchBar = () => {
 
   const handleSaveRestaurant = async (restaurant) => {
     // get token
+
+    console.log(restaurant);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -26,14 +40,13 @@ const SearchBar = () => {
 
     try {
       // remove __typename field from restaurant object
-      const { __typename, ...restaurantInput } = restaurant;
+      const restaurantInput = cleanTypename(restaurant);
 
       // call the saveRestaurant mutation with restaurantInput
       const { data } = await saveRestaurant({
         variables: { input: restaurantInput },
       });
 
-      console.log(data.saveRestaurant);
     } catch (err) {
       console.error(err);
     }
@@ -58,8 +71,9 @@ const SearchBar = () => {
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
+        <LocationForm  />
         </div>
-        <button type="submit" className='btn btn-primary mb-2'>Search</button>
+        <button type="submit" className='btn btn-outline-light mb-2'>Search</button>
       </form>
       <div className="card-container">
         {loading && <div>Loading...</div>}
@@ -70,7 +84,7 @@ const SearchBar = () => {
         {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
 
         {data && data.searchRestaurants.map((restaurant) => (
-          <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
+          <Card className='transparent-card px-4' key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
               <Card.Title>{restaurant.name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{restaurant.vicinity}</Card.Subtitle>
@@ -78,7 +92,7 @@ const SearchBar = () => {
                 Rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews)
               </Card.Text>
               <div>
-                <Button variant="secondary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
+                <Button variant="primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
                 <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
                 </div>
             </Card.Body>

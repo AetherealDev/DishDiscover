@@ -17,8 +17,8 @@ const resolvers = {
         },
         searchRestaurants: async (parent, { term }) => {
             const results = await nearbySearch(term);
-            console.log(results.results[0].geometry);
-            console.log(results.results[0].photos[0]);
+            // console.log(results.results[0]);
+            // console.log(results.results[0].geometry);
 
             return results.results; // return the array of results
         }
@@ -43,17 +43,20 @@ const resolvers = {
             return { token, user };
         },
 
-        removeRestaurant:  async (parent, { restrauntId }, { user }) => {
+        removeRestaurant: async (parent, { restaurantId }, { user }) => {
+           // console.log(restaurantId);
             const updatedUser = await User.findOneAndUpdate(
-              { _id: user._id },
-              { $pull: { savedRestraunt: { restrauntId } } },
-              { new: true }
+                { _id: user._id },
+                { $pull: { savedRestaurants: { place_id: restaurantId } } },
+                { new: true }
             );
+            console.log(updatedUser);
             return updatedUser;
         },
 
-        saveRestaurant:  async (parent, { input }, { user }) => {
+        saveRestaurant: async (parent, { input }, { user }) => {
             try {
+               // console.log(input);
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: user._id },
                     { $addToSet: { savedRestaurants: input } },

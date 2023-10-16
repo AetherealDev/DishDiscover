@@ -18,6 +18,34 @@ const Restaurant = new Schema({
     user_ratings_total: {
         type: Number,
     },
+    geometry: {
+        location: {
+            lat: {
+                type: Number,
+            },
+            lng: {
+                type: Number,
+            },
+        },
+        viewport: {
+            northeast: {
+                lat: {
+                    type: Number,
+                },
+                lng: {
+                    type: Number,
+                },
+            },
+            southwest: {
+                lat: {
+                    type: Number,
+                },
+                lng: {
+                    type: Number,
+                },
+            },
+        },
+    },
   });
 
 module.exports = Restaurant;

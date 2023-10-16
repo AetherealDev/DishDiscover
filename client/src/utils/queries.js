@@ -20,11 +20,27 @@ query Me {
 export const QUERY_RESTAURANTS = gql`
 query SearchRestaurants($term: String!) {
   searchRestaurants(term: $term) {
-    name
-    rating
     place_id
+    name
     vicinity
+    rating
     user_ratings_total
+    geometry {
+      location {
+        lat
+        lng
+      }
+      viewport {
+        northeast {
+          lat
+          lng
+        }
+        southwest {
+          lat
+          lng
+        }
+      }
+    }
   }
 }
 `
