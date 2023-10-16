@@ -5,6 +5,7 @@ import { SAVE_RESTAURANT } from '../../utils/mutations';
 import { useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
+import LocationForm from '../LocationForm';
 
 
 function cleanTypename(obj) {
@@ -21,6 +22,7 @@ const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
+  const [buttonClicked, setButtonClicked] = useState(false); // state variable to keep track of button click
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,8 +31,6 @@ const SearchBar = () => {
 
   const handleSaveRestaurant = async (restaurant) => {
     // get token
-
-    console.log(restaurant);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -45,6 +45,9 @@ const SearchBar = () => {
       const { data } = await saveRestaurant({
         variables: { input: restaurantInput },
       });
+
+      // set buttonClicked to true after successful save
+      setButtonClicked(true);
 
     } catch (err) {
       console.error(err);
@@ -70,6 +73,7 @@ const SearchBar = () => {
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
+        <LocationForm />
         </div>
         <button type="submit" className='btn btn-outline-light mb-2'>Search</button>
       </form>
@@ -82,7 +86,6 @@ const SearchBar = () => {
         {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
 
         {data && data.searchRestaurants.map((restaurant) => (
-          console.log(restaurant),
           <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
               <Card.Title>{restaurant.name}</Card.Title>
@@ -91,9 +94,9 @@ const SearchBar = () => {
                 Rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews)
               </Card.Text>
               <div>
-                <Button variant="primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
-                <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
-                </div>
+              <Button variant="primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
+                <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)} disabled={buttonClicked}>Favorite</Button>
+              </div>
             </Card.Body>
           </Card>
         ))}
@@ -103,3 +106,4 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
