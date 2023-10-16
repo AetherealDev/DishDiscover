@@ -43,12 +43,14 @@ const resolvers = {
             return { token, user };
         },
 
-        removeRestaurant:  async (parent, { restrauntId }, { user }) => {
+        removeRestaurant: async (parent, { restaurantId }, { user }) => {
+            console.log(restaurantId);
             const updatedUser = await User.findOneAndUpdate(
-              { _id: user._id },
-              { $pull: { savedRestraunt: { restrauntId } } },
-              { new: true }
+                { _id: user._id },
+                { $pull: { savedRestaurants: { place_id: restaurantId } } },
+                { new: true }
             );
+            console.log(updatedUser);
             return updatedUser;
         },
 

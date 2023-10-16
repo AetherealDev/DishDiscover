@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import UnfavoriteButton from '../UnfavoriteButton';
 
 const RestaurantCard = ({
     restaurants,
@@ -20,6 +21,7 @@ const RestaurantCard = ({
             <div className="card-body bg-light p-2">
             <p>address: {restaurant.vicinity}</p>
             <p>rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews) </p>
+            <UnfavoriteButton restaurantId={restaurant.place_id} />
             </div>
             </div>
         ))}

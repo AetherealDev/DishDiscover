@@ -39,3 +39,5 @@ const UnfavoriteButton = ({ restaurantId }) => {
         </Button>
     );
     }
+
+    export default UnfavoriteButton;
