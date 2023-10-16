@@ -84,8 +84,7 @@ const SearchBar = () => {
         {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
 
         {data && data.searchRestaurants.map((restaurant) => (
-          console.log(restaurant),
-          <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
+          <Card className='transparent-card px-4' key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
               <Card.Title>{restaurant.name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{restaurant.vicinity}</Card.Subtitle>
