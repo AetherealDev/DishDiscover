@@ -25,7 +25,7 @@ const SearchBar = () => {
 
   const [location, setLocation] = useState({
     lat: 39.983334,
-    lon: -82.983330
+    lng: -82.983330
   });
 
 
@@ -34,9 +34,9 @@ const SearchBar = () => {
     console.log(address);
   };
 
-  const onLocationChange = (lat, lon) => {
-    setLocation({ lat, lon });
-    console.log(lat, lon);
+  const onLocationChange = (lat, lng) => {
+    setLocation({ lat, lng });
+    console.log(lat, lng);
   };
 
   const handleSubmit = async (e) => {
@@ -90,7 +90,7 @@ const SearchBar = () => {
         <LocationForm 
         address={address} 
         onAddressChange= { (address) => onAddressChange(address)}
-        onLocationChange= { (location) => onLocationChange( location.lat, location.lon)}
+        onLocationChange= { (loc) => onLocationChange( loc.lat, loc.lng)}
         />
         </div>
         <button type="submit" className='btn btn-outline-light mb-2'>Search</button>

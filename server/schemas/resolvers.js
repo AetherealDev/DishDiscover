@@ -15,8 +15,8 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in');
         },
-        searchRestaurants: async (parent, { term }) => {
-            const results = await nearbySearch(term);
+        searchRestaurants: async (parent, { term, location }) => {
+            const results = await nearbySearch(term, location);
             // console.log(results.results[0]);
             // console.log(results.results[0].geometry);
 

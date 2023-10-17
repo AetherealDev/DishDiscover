@@ -66,7 +66,7 @@ type Auth {
 
 type Query {
   me: User
-  searchRestaurants(term: String!): [GoogleRestaurant]
+  searchRestaurants(term: String!, location: LocationInput!): [GoogleRestaurant]
 }
 
 type Mutation {
