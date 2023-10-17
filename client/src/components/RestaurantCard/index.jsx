@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import UnfavoriteButton from '../UnfavoriteButton';
+import { Button } from 'react-bootstrap';
 
 const RestaurantCard = ({
     restaurants,
@@ -16,11 +17,12 @@ const RestaurantCard = ({
       {showTitle && <h3>{title}</h3>}
       {restaurants &&
         restaurants.map((restaurant) => (
-          <div key={restaurant._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">{restaurant.name}</h4>
-            <div className="card-body bg-light p-2">
+          <div key={restaurant._id} className="card mb-3 transparent-card">
+            <h4 className="bg-purple text-light">{restaurant.name}</h4>
+            <div className=" p-2">
             <p>address: {restaurant.vicinity}</p>
             <p>rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews) </p>
+            <Button variant="primary" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
             <UnfavoriteButton restaurantId={restaurant.place_id} />
             </div>
             </div>
