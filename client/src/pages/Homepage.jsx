@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="homepage">
        <SearchBar />
-      <MapSection location={location} defaultZoom={4} />
+      {/* <MapSection location={location} defaultZoom={4} /> */}
     </div>
   );
 };
