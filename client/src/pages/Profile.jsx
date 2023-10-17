@@ -5,6 +5,8 @@ import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import RestaurantCard from '../components/RestaurantCard';
 
+
+// Fix: add a closing curly brace for the Profile function
 const Profile = () => {
   const { username: userParam } = useParams();
 
@@ -34,20 +36,18 @@ const Profile = () => {
 
   return (
     <>
-    <div className='d-flex'>
-      <div className="flex-row justify-center mb-3 my-auto mx-auto" >
-        <div className="col-12 col-md-10 mb-5">
-          <RestaurantCard
-          key={user.savedRestaurants.place_id}
-            restaurants={user.savedRestaurants}
-            title={`${user.email}'s favorites...`}
-            showUsername={false}
-          />
+      <div className='d-flex flex-wrap'>
+        <div className="flex-grid justify-center mb-3 my-auto mx-auto" >
+            <RestaurantCard
+              className="transparent-card"
+              restaurants={user.savedRestaurants}
+              title={`${user.email}'s favorites...`}
+              showUsername={false}
+            />
         </div>
       </div>
-    </div>
     </>
   );
-};
+}
 
 export default Profile;

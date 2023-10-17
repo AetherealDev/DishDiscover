@@ -31,7 +31,7 @@ const LocationForm = ({address, onAddressChange, onLocationChange}) => {
                 <Form.Label>Address</Form.Label>
                 <Form.Control
                     type="text"
-                    placeholder="1234 Main St"
+                    placeholder="Columbus, Ohio"
                     value={address}
                     onChange={(e) => onAddressChange(e.target.value)}
                     ref={ref} 
