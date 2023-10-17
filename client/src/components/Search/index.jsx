@@ -22,25 +22,26 @@ const SearchBar = () => {
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
   const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
+
+  const [location, setLocation] = useState({
+    lat: 39.983334,
+    lng: -82.983330
+  });
+
 
   const onAddressChange = (address) => {
     setAddress(address);
     console.log(address);
   };
 
-  const onCityChange = (city) => {
-    setCity(city);
-  };
-
-  const onStateChange = (state) => {
-    setState(state);
+  const onLocationChange = (lat, lng) => {
+    setLocation({ lat, lng });
+    console.log(lat, lng);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    getRestaurants({ variables: { term: term } });
+    getRestaurants({ variables: { term: term, location: location } });
   };
 
   const handleSaveRestaurant = async (restaurant) => {
@@ -87,12 +88,9 @@ const SearchBar = () => {
           placeholder="Search restaurants..."
         />
         <LocationForm 
-        city={city} 
         address={address} 
-        state={state} 
         onAddressChange= { (address) => onAddressChange(address)}
-        onCityChange= { (city) => onCityChange(city) }
-        onStateChange= { (state) => onStateChange(state)}
+        onLocationChange= { (loc) => onLocationChange( loc.lat, loc.lng)}
         />
         </div>
         <button type="submit" className='btn btn-outline-light mb-2'>Search</button>

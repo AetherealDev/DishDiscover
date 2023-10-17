@@ -18,8 +18,8 @@ query Me {
 }
 `
 export const QUERY_RESTAURANTS = gql`
-query SearchRestaurants($term: String!) {
-  searchRestaurants(term: $term) {
+query SearchRestaurants($term: String!, $location: LocationInput!) {
+  searchRestaurants(term: $term, location: $location) {
     place_id
     name
     vicinity
