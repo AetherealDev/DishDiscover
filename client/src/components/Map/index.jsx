@@ -1,52 +1,40 @@
-import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import { Icon } from '@iconify/react'
-import locationIcon from '@iconify/icons-mdi/map-marker'
+import React, { useState, useEffect } from 'react';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
-import './map.css'
+const MapWithMarkers = withScriptjs(
+  withGoogleMap(({ markers }) => (
+    <GoogleMap
+      defaultZoom={12}
+      defaultCenter={{ lat: 39.983334, lng: -82.973330 }} // Default center (Columbus)
+    >
+      {markers.map((marker, index) => (
+        <Marker
+          key={index}
+          position={{ lat: marker.lat, lng: marker.lng }}
+          title={marker.title}
+        />
+      ))}
+    </GoogleMap>
+  ))
+);
 
-const location = {
-  address: '1600 Amphitheatre Parkway, Mountain View, california.',
-  lat: 39.983334,
-  lng: -82.973330,
-}
+const MapContainer = () => {
+  // Example data, replace with marker data
+  const [markers, setMarkers] = useState([
+    { lat: 39.983334, lng: -82.973330, title: 'Marker 1' },
+    { lat: 37.7749, lng: -122.4294, title: 'Marker 2' },
+    // Add more markers as needed
+  ]);
 
+  return (
+    <MapWithMarkers
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVENG2N3Pkgwg-R90W7f39F1p8ZGlFMQ&v=3.exp&libraries=geometry,drawing,places`}
+      loadingElement={<div style={{ height: '100%' }} />}
+      containerElement={<div style={{ height: '400px' }} />}
+      mapElement={<div style={{ height: '100%' }} />}
+      markers={markers}
+    />
+  );
+};
 
-const LocationPin = ({ text }) => (
-  <div className="pin">
-    <Icon icon={locationIcon} className="pin-icon" />
-    <p className="pin-text">{text}</p>
-  </div>
-)
-
-export default function Map( {location, zoomLevel} )
-{
-  const defaultProps = {
-    center: {
-      lat: 39.983334,
-      lng: -82.983330
-    },
-    zoom: 13
-  }; 
-
-    return (
-      <div className="map mt-4 mb-5">
-    
-        <div className="google-map">
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyBjVENG2N3Pkgwg-R90W7f39F1p8ZGlFMQ" }}
-            defaultCenter={defaultProps.center}
-            defaultZoom={defaultProps.zoom}
-          >
-            <LocationPin
-              lat={defaultProps.center.lat}
-              lng={defaultProps.center.lng}
-              text={location.address}
-            />
-          </GoogleMapReact>
-        </div>
-      </div>
-    )
-
-}
-
+export default MapContainer;

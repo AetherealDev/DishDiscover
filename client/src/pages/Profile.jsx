@@ -38,6 +38,7 @@ const Profile = () => {
       <div className="flex-row justify-center mb-3 my-auto mx-auto" >
         <div className="col-12 col-md-10 mb-5">
           <RestaurantCard
+          key={user.savedRestaurants.place_id}
             restaurants={user.savedRestaurants}
             title={`${user.email}'s favorites...`}
             showUsername={false}

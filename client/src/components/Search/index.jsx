@@ -1,53 +1,24 @@
+import { useState } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
 import { SAVE_RESTAURANT } from '../../utils/mutations';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import MapContainer from '../Map';
 import Auth from '../../utils/auth';
-import LocationForm from '../LocationForm';
-
-
-function cleanTypename(obj) {
-  const { __typename, ...result } = obj;
-  Object.keys(result).forEach(key => {
-    if (typeof result[key] === 'object' && result[key] !== null) {
-      result[key] = cleanTypename(result[key]);
-    }
-  });
-  return result;
-}
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
-  const [address, setAddress] = useState('');
-
-  const [location, setLocation] = useState({
-    lat: 39.983334,
-    lng: -82.983330
-  });
-
-
-  const onAddressChange = (address) => {
-    setAddress(address);
-    console.log(address);
-  };
-
-  const onLocationChange = (lat, lng) => {
-    setLocation({ lat, lng });
-    console.log(lat, lng);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    getRestaurants({ variables: { term: term, location: location } });
+    getRestaurants({ variables: { term: term } });
   };
 
   const handleSaveRestaurant = async (restaurant) => {
     // get token
-
-    console.log(restaurant);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -56,13 +27,14 @@ const SearchBar = () => {
 
     try {
       // remove __typename field from restaurant object
-      const restaurantInput = cleanTypename(restaurant);
+      const { __typename, ...restaurantInput } = restaurant;
 
       // call the saveRestaurant mutation with restaurantInput
       const { data } = await saveRestaurant({
         variables: { input: restaurantInput },
       });
 
+      console.log(data.saveRestaurant);
     } catch (err) {
       console.error(err);
     }
@@ -87,13 +59,8 @@ const SearchBar = () => {
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
-        <LocationForm 
-        address={address} 
-        onAddressChange= { (address) => onAddressChange(address)}
-        onLocationChange= { (loc) => onLocationChange( loc.lat, loc.lng)}
-        />
         </div>
-        <button type="submit" className='btn btn-outline-light mb-2'>Search</button>
+        <button type="submit" className='btn btn-primary mb-2'>Search</button>
       </form>
       <div className="card-container">
         {loading && <div>Loading...</div>}
@@ -104,7 +71,7 @@ const SearchBar = () => {
         {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
 
         {data && data.searchRestaurants.map((restaurant) => (
-          <Card className='transparent-card px-4' key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
+          <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
               <Card.Title>{restaurant.name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{restaurant.vicinity}</Card.Subtitle>
@@ -112,13 +79,14 @@ const SearchBar = () => {
                 Rating: {restaurant.rating} ({restaurant.user_ratings_total} reviews)
               </Card.Text>
               <div>
-                <Button variant="primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
+                <Button variant="secondary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
                 <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
                 </div>
             </Card.Body>
           </Card>
-        ))}
+        ))}      
       </div>
+      {data && data.searchRestaurants.length && <MapContainer restaurants={data.searchRestaurants} />}
     </div>
   );
 };
