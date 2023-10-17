@@ -1,5 +1,5 @@
-import { useLazyQuery, useMutation } from '@apollo/client';
-import { QUERY_RESTAURANTS } from '../../utils/queries';
+import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
+import { QUERY_RESTAURANTS, QUERY_ME } from '../../utils/queries';
 import { SAVE_RESTAURANT } from '../../utils/mutations';
 import { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
@@ -22,6 +22,12 @@ const SearchBar = () => {
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
   const [address, setAddress] = useState('');
+
+  const { data: dataMe } = useQuery(QUERY_ME, {
+    variables: { username: "me" },
+  });
+
+  console.log(dataMe);
 
   const [location, setLocation] = useState({
     lat: 39.983334,
@@ -70,11 +76,11 @@ const SearchBar = () => {
 
   // Log the restaurant data when it changes
   useEffect(() => {
-    if (data) {
-      console.log(data.restaurants);
+    if (dataMe?.me?.savedRestaurants) {
+      console.log(dataMe.me.savedRestaurants);
     }
-  }, [data]);
-
+  }, [dataMe]);
+  
   return (
     <div className='mt-5 pt-5'>
       <h1>Search Restaurants</h1>
@@ -113,14 +119,19 @@ const SearchBar = () => {
               </Card.Text>
               <div>
                 <Button variant="primary" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${restaurant.name}&query_place_id=${restaurant.place_id}`)}>Map</Button>
-                <Button variant="success" size="sm" onClick={() => handleSaveRestaurant(restaurant)}>Favorite</Button>
-                </div>
+                {dataMe?.me?.savedRestaurants && (
+                  <Button variant="success" size="sm" onClick={() =>
+                     handleSaveRestaurant(restaurant)} 
+                     disabled={dataMe.me.savedRestaurants.some(savedRestaurant => savedRestaurant.place_id === restaurant.place_id)}>Favorite</Button>
+                )}
+              </div>
             </Card.Body>
           </Card>
         ))}
+
       </div>
     </div>
   );
-};
+}
 
 export default SearchBar;
