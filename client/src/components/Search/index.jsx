@@ -11,10 +11,12 @@ const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
+  const [map, setMap] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     getRestaurants({ variables: { term: term } });
+    setMap(<MapContainer restaurants={data.searchRestaurants} />);
   };
 
   const handleSaveRestaurant = async (restaurant) => {
