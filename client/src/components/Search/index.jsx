@@ -1,17 +1,27 @@
 import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
 import { QUERY_RESTAURANTS, QUERY_ME } from '../../utils/queries';
 import { SAVE_RESTAURANT } from '../../utils/mutations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
-import MapContainer from '../Map';
 import Auth from '../../utils/auth';
+import LocationForm from '../LocationForm';
+
+
+function cleanTypename(obj) {
+  const { __typename, ...result } = obj;
+  Object.keys(result).forEach(key => {
+    if (typeof result[key] === 'object' && result[key] !== null) {
+      result[key] = cleanTypename(result[key]);
+    }
+  });
+  return result;
+}
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [getRestaurants, { loading, error, data }] = useLazyQuery(QUERY_RESTAURANTS);
   const [saveRestaurant] = useMutation(SAVE_RESTAURANT);
   const [address, setAddress] = useState('');
-  const [map, setMap] = useState(null);
 
   const { data: dataMe } = useQuery(QUERY_ME, {
     variables: { username: "me" },
@@ -37,12 +47,14 @@ const SearchBar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    getRestaurants({ variables: { term: term } });
-    setMap(<MapContainer restaurants={data.searchRestaurants} />);
+    getRestaurants({ variables: { term: term, location: location } });
+    console.log(data.searchRestaurants);
   };
 
   const handleSaveRestaurant = async (restaurant) => {
     // get token
+
+    console.log(restaurant);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -51,14 +63,13 @@ const SearchBar = () => {
 
     try {
       // remove __typename field from restaurant object
-      const { __typename, ...restaurantInput } = restaurant;
+      const restaurantInput = cleanTypename(restaurant);
 
       // call the saveRestaurant mutation with restaurantInput
       const { data } = await saveRestaurant({
         variables: { input: restaurantInput },
       });
 
-      console.log(data.saveRestaurant);
     } catch (err) {
       console.error(err);
     }
@@ -83,8 +94,13 @@ const SearchBar = () => {
           onChange={e => setTerm(e.target.value)}
           placeholder="Search restaurants..."
         />
+        <LocationForm 
+        address={address} 
+        onAddressChange= { (address) => onAddressChange(address)}
+        onLocationChange= { (loc) => onLocationChange( loc.lat, loc.lng)}
+        />
         </div>
-        <button type="submit" className='btn btn-primary mb-2'>Search</button>
+        <button type="submit" className='btn btn-outline-light mb-2'>Search</button>
       </form>
       <div className="card-container">
         {loading && <div>Loading...</div>}
@@ -95,7 +111,7 @@ const SearchBar = () => {
         {data && data.searchRestaurants.length && <div>Results: {data.searchRestaurants.length}</div>}
 
         {data && data.searchRestaurants.map((restaurant) => (
-          <Card key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
+          <Card className='transparent-card px-4' key={restaurant.place_id} style={{ width: '18rem', display: 'inline-block' }}>
             <Card.Body>
               <Card.Title>{restaurant.name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{restaurant.vicinity}</Card.Subtitle>
@@ -113,9 +129,7 @@ const SearchBar = () => {
             </Card.Body>
           </Card>
         ))}
-
       </div>
-      {data && data.searchRestaurants.length && <MapContainer restaurants={data.searchRestaurants} />}
     </div>
   );
 }

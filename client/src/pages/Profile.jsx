@@ -1,10 +1,10 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
+import MapContainer from '../components/Map';
 
 import Auth from '../utils/auth';
 import RestaurantCard from '../components/RestaurantCard';
-
 
 // Fix: add a closing curly brace for the Profile function
 const Profile = () => {
@@ -34,6 +34,23 @@ const Profile = () => {
     );
   }
 
+  const savedRestaurants = user.savedRestaurants.map((restaurant) => restaurant);
+
+  // const savedRestaurantsNames = user.savedRestaurants.map((name) => user.savedRestaurants.name);
+
+  // const newRestaurantLocations = savedRestaurants.map((location) => {lat: savedRestaurants.geometry.location.lat, lng: savedRestaurants.geometry.location.lng});
+
+  const newMarkers = savedRestaurants.map(({ geometry, name }) => ({
+    lat: parseFloat(geometry.location.lat),
+    lng: parseFloat(geometry.location.lng),
+    title: name,
+  }));
+
+  console.log("new Markers", newMarkers);
+
+
+
+
   return (
     <>
       <div className='d-flex flex-wrap'>
@@ -46,6 +63,7 @@ const Profile = () => {
             />
         </div>
       </div>
+      <MapContainer markers={newMarkers}/>
     </>
   );
 }

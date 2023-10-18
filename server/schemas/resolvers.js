@@ -21,7 +21,15 @@ const resolvers = {
             // console.log(results.results[0].geometry);
 
             return results.results; // return the array of results
-        }
+        },
+        savedRestaurants: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password') // exclude the __v and password fields
+                return userData.savedRestaurants;
+            }
+            throw new AuthenticationError('Not logged in');
+        },
     },
     Mutation: {
         loginUser: async (parent, { email, password }) => {

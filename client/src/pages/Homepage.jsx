@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="homepage">
        <SearchBar />
-      <MapContainer location={location} defaultZoom={4} />
+      {/* <MapContainer location={location} defaultZoom={4} /> */}
     </div>
   );
 };

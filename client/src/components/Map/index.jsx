@@ -10,7 +10,7 @@ const MapWithMarkers = withScriptjs(
       {markers.map((marker, index) => (
         <Marker
           key={index}
-          position={{ lat: marker.lat, lng: marker.lng }}
+          position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
           title={marker.title}
         />
       ))}
@@ -18,13 +18,19 @@ const MapWithMarkers = withScriptjs(
   ))
 );
 
-const MapContainer = () => {
+
+const MapContainer = (props) => {
+  const newMarkers = props.markers.map(({ lat, lng, name }) => ({
+    lat: parseFloat(lat),
+    lng: parseFloat(lng),
+    title: name,
+  }));
   // Example data, replace with marker data
   const [markers, setMarkers] = useState([
-    { lat: 39.983334, lng: -82.973330, title: 'Marker 1' },
-    { lat: 37.7749, lng: -122.4294, title: 'Marker 2' },
-    // Add more markers as needed
+    newMarkers
   ]);
+
+  console.log("props", props);
 
   return (
     <MapWithMarkers
@@ -32,7 +38,7 @@ const MapContainer = () => {
       loadingElement={<div style={{ height: '100%' }} />}
       containerElement={<div style={{ height: '400px' }} />}
       mapElement={<div style={{ height: '100%' }} />}
-      markers={markers}
+      markers={newMarkers}
     />
   );
 };

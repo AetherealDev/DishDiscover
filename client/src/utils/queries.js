@@ -9,6 +9,12 @@ query Me {
     restaurantCount
     savedRestaurants {
       name
+      geometry {
+        location {
+          lat
+          lng
+        }
+      }
     rating
     place_id
     vicinity
@@ -17,6 +23,22 @@ query Me {
   }, 
 }
 `
+
+export const QUERY_SAVED_RESTAURANTS = gql`
+query getSavedRestaurants {
+    savedRestaurants {
+      name
+       geometry {
+        location {
+          lat
+          lng
+        }
+      }
+    }
+  
+}
+`
+
 export const QUERY_RESTAURANTS = gql`
 query SearchRestaurants($term: String!, $location: LocationInput!) {
   searchRestaurants(term: $term, location: $location) {
