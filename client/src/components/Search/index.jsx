@@ -48,6 +48,7 @@ const SearchBar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     getRestaurants({ variables: { term: term, location: location } });
+    console.log(data.searchRestaurants);
   };
 
   const handleSaveRestaurant = async (restaurant) => {
@@ -128,7 +129,6 @@ const SearchBar = () => {
             </Card.Body>
           </Card>
         ))}
-
       </div>
     </div>
   );
